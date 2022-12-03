@@ -28,3 +28,13 @@ console.log(
   )
 );
 
+// Bonus
+console.log(
+  input.split('\n\n').map((line) =>
+      line
+        .split('\n')
+        .map((s) => Number(s))
+        .reduce((a, c) => a + c, 0)
+    ).sort().reverse().slice(0,3).reduce((a, c) => a+c, 0)
+);
+
