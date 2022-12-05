@@ -1,8 +1,13 @@
+'use strict';
+
 import * as fs from 'fs/promises';
 
 const input = await fs.readFile('input.txt', 'utf-8');
 
-// Not working due to implicit type conversion?
+// Solution for https://adventofcode.com/2022/day/4
+
+// First try: Not working due to implicit type conversion?
+// Idea was to create a long string containing all numbers between the two numbers in the assignment.
 // const translateAssingments = (s) => {
 //   const first = s.slice(0, s.indexOf('-'));
 //   const second = s.slice(s.indexOf('-') + 1);
@@ -24,6 +29,7 @@ const input = await fs.readFile('input.txt', 'utf-8');
 // );
 
 console.log(
+  'Result of day 4, part 1: ',
   input
     .split('\n')
     .map((l) => l.split(',').map((s) => s.split('-')))
@@ -36,6 +42,7 @@ console.log(
 
 // Bonus
 console.log(
+  'Result of day 4, part 2: ',
   input
     .split('\n')
     .map((l) => l.split(',').map((s) => s.split('-')))

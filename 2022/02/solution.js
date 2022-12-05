@@ -1,7 +1,17 @@
+'use strict';
+
 import * as fs from 'fs/promises';
 
 const input = await fs.readFile('input.txt', 'utf-8');
 
+// Solution for https://adventofcode.com/2022/day/2
+
+/**
+ * Matches the input to the resulting value.
+ *
+ * @param {string} input A string containing A-C in first and X-Z in second position.
+ * @returns {number} A number matching the result value of a rock-paper-scissors game.
+ */
 function calcResult(input) {
   // A: Rock, B: Paper, C: Scissors
   // X: Rock, Y: Paper, Z: Scissors
@@ -22,6 +32,7 @@ function calcResult(input) {
 }
 
 console.log(
+  'Result of day 2, part 1: ',
   input
     .split('\n')
     .map((line) => line.replace(' ', ''))
@@ -29,6 +40,12 @@ console.log(
 );
 
 // Bonus
+/**
+ * Matches the input to the resulting value.
+ *
+ * @param {string} input A string containing A-C in first and X-Z in second position.
+ * @returns {number} A number matching the result value of a rock-paper-scissors game.
+ */
 function calcBonusResult(input) {
   // A: Rock, B: Paper, C: Scissors
   // X: Lose, Y: Draw, Z: Win
@@ -49,6 +66,7 @@ function calcBonusResult(input) {
 }
 
 console.log(
+  'Result of day 2, part 2: ',
   input
     .split('\n')
     .map((line) => line.replace(' ', ''))
