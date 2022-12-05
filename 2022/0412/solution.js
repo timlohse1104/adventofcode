@@ -41,10 +41,10 @@ console.log(
     .map((l) => l.split(',').map((s) => s.split('-')))
     .filter(
       (l) =>
-        Number(l[0][0]) >= Number(l[1][0]) ||
-        Number(l[0][1]) <= Number(l[1][1]) ||
-        Number(l[1][0]) >= Number(l[0][0]) ||
-        Number(l[1][1]) <= Number(l[0][1])
+        (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][0]) <= Number(l[1][1])) ||
+        (Number(l[0][1]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
+        (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][0]) <= Number(l[0][1])) ||
+        (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
     ).length
 );
 
