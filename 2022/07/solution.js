@@ -10,10 +10,10 @@ console.log(
   input
     .split('\n')
     .map((l, i, a) => {
-      const ಠ_ಠ = { size: '', size: 0, dirs: [], files: [] };
+      const ಠ_ಠ = { name: '', size: 0, dirs: [], files: [] };
       if (/^\$\s(cd)\s(\w+)|\//.test(l)) {
         let j = i + 2;
-        ಠ_ಠ.size = l.replace('$ cd ', '');
+        ಠ_ಠ.name = l.replace('$ cd ', '');
         while (!/^\$.+/.test(a[j]) && a[j]) {
           const e = {
             type: /^\d+/.test(a[j]) ? 'file' : 'dir',
