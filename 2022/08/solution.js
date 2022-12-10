@@ -12,7 +12,7 @@ const input = await fs.readFile('input.txt', 'utf-8');
 const grid = input.split('\n').map((l) => l.split('').map((e) => Number(e)));
 const getNeighbors = (grid, x, y) => {
   const neighbors = { left: [], right: [], top: [], bottom: [] };
-  for (let i = 1; i <= 100; i++) {
+  for (let i = 1; i <= grid.length; i++) {
     if (grid[y - i]) neighbors.top.push(grid[y - i][x]);
     if (grid[y + i]) neighbors.bottom.push(grid[y + i][x]);
     if (grid[y][x - i] || grid[y][x - i] === 0) neighbors.left.push(grid[y][x - i]);
@@ -31,13 +31,33 @@ const isExposed = (c, n) => {
 };
 
 const getRowExposedCount = (r, y, g) => {
-  const foo = r.reduce((a, c, i) => {
-    const neighbors = getNeighbors(g, i, y);
+  const foo = r.reduce((a, c, x) => {
+    const neighbors = getNeighbors(g, x, y);
     return a + (Object.values(neighbors).filter((n) => n.length > 0).length < 4 ? 1 : isExposed(c, neighbors) ? 1 : 0);
   }, 0);
-  console.log('exposedCount', 'line', y, 'is', foo);
   return foo;
 };
 
-console.log(grid.reduce((a, c, i, g) => a + getRowExposedCount(c, i, g), 0));
+console.log(grid.reduce((a, c, y, g) => a + getRowExposedCount(c, y, g), 0));
+
+// Bonus
+const getDirectionCount = (t, d) => {
+  let count = 0;
+  d.every((e) => {
+    if (e >= t) {
+      count++;
+      return false;
+    }
+    count++;
+    return true;
+  });
+  return count;
+};
+
+const calcScenicScoreOfRow = (r, y, g) =>
+  r.map((t, x) => {
+    const n = getNeighbors(g, x, y);
+    return getDirectionCount(t, n.left) * getDirectionCount(t, n.right) * getDirectionCount(t, n.top) * getDirectionCount(t, n.bottom);
+  });
+console.log('Bonus', Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat()));
 
