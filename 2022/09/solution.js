@@ -6,38 +6,51 @@ const input = await fs.readFile('input.txt', 'utf-8');
 
 // Solution for https://adventofcode.com/2022/day/9
 
-const moves = input.split('\n').map((m) => m.split(' ').map((e, i) => (i === 1 ? Number(e) : e)));
+const movements = input
+  .split('\n')
+  .map((m) => m.split(' '))
+  .map((e) => ({
+    direction: e[0],
+    distance: Number(e[1]),
+  }));
 
-let head = { x: 0, y: 0 };
-let tail = { x: 0, y: 0 };
-const headHistory = [{ x: 0, y: 0 }];
-const tailHistory = [{ x: 0, y: 0 }];
+function calcTailHistory(movements) {
+  let head = { x: 0, y: 0 };
+  let tail = { x: 0, y: 0 };
+  const headHistory = [{ x: 0, y: 0 }];
+  const tailHistory = [{ x: 0, y: 0 }];
 
-const getDistance = (lead, follow) => {
-  return { x: Math.abs(lead.x - follow.x), y: Math.abs(lead.y - follow.y) };
-};
+  const getDistance = (lead, follow) => ({ x: Math.abs(lead.x - follow.x), y: Math.abs(lead.y - follow.y) });
 
-const move = (node, nodeHistory, directionString, directionNode) => {
-  const directions = { U: { x: 0, y: 1 }, D: { x: 0, y: -1 }, L: { x: -1, y: 0 }, R: { x: 1, y: 0 } };
-  node.x += directionNode ? directionNode.x : directions[directionString].x;
-  node.y += directionNode ? directionNode.y : directions[directionString].y;
-  nodeHistory.push({ ...node });
-};
+  const makeMove = (direction) => {
+    const directions = { U: { x: 0, y: 1 }, D: { x: 0, y: -1 }, L: { x: -1, y: 0 }, R: { x: 1, y: 0 } };
+    // Move head first
+    head.x += Math.sign(directions[direction].x);
+    head.y += Math.sign(directions[direction].y);
+    headHistory.push({ ...head });
+    // Move tail according to distance between head and tail
+    if (Math.abs(head.x - tail.x) === 2) tail.x += Math.sign(directions[direction].x);
+    if (Math.abs(head.y - tail.y) === 2) tail.y += Math.sign(directions[direction].y);
+    tailHistory.push({ ...tail });
 
-moves.forEach((m) => {
-  console.log(m);
-  if (m[1] > 1) {
-    for (let i = 1; i <= m[1]; i++) {
-      move(head, headHistory, m[0]);
-      const distanceNode = getDistance(head, tail);
-      if (distanceNode.x > 1 || distanceNode.y > 1) move(tail, tailHistory, '', distanceNode);
-    }
-  } else {
-    move(head, headHistory, m[0]);
     const distanceNode = getDistance(head, tail);
-    if (distanceNode.x > 1 || distanceNode.y > 1) move(tail, tailHistory, '', distanceNode);
+    if (distanceNode.x > 1) moveX(tail, tailHistory, '', distanceNode);
+    if (distanceNode.y > 1) moveY(tail, tailHistory, '', distanceNode);
+  };
+
+  for (const movement of movements) {
+    if (movement.distance > 1) {
+      for (let i = 1; i <= movement.distance; i++) {
+        makeMove(movement.direction);
+      }
+    } else {
+      makeMove(movement.direction);
+    }
   }
-});
+
+  return tailHistory;
+}
+const tailHistory = calcTailHistory(movements);
 
 console.log(tailHistory.length);
 const xY = new Set();
