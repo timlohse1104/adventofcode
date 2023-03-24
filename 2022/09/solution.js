@@ -58,15 +58,15 @@ moves.forEach((m) => {
   if (m[1] > 1) {
     for (let i = 1; i <= m[1]; i++) {
       makeMove("head", m[0]);
-      calcDistance() > 1 ? makeMove("tail") : 0;
+      if (calcDistance() > 1) makeMove("tail");
     }
   } else {
     makeMove("head", m[0]);
-    calcDistance() > 1 ? makeMove("tail") : 0;
+    if (calcDistance() > 1) makeMove("tail");
   }
 });
 
-console.log(tailHistory.length);
+console.log("tail", tailHistory.length);
 const xY = new Set();
 const uniqueTailHistory = tailHistory.filter((entry) => {
   if (xY.has(entry.x && entry.y)) {
@@ -75,4 +75,16 @@ const uniqueTailHistory = tailHistory.filter((entry) => {
   xY.add(entry.x, entry.y);
   return true;
 });
-console.log("unique", uniqueTailHistory.length);
+console.log("tail unique", uniqueTailHistory.length);
+
+console.log("head", headHistory.length);
+const yX = new Set();
+const uniqueHeadHistory = tailHistory.filter((entry) => {
+  if (yX.has(entry.x && entry.y)) {
+    return false;
+  }
+  yX.add(entry.x, entry.y);
+  return true;
+});
+console.log("head unique", uniqueHeadHistory.length);
+console.log(headHistory.length - tailHistory.length);
