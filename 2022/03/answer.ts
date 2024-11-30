@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const input = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/3
 
@@ -55,4 +53,3 @@ console.log(
     .map((l) => calculateDuplicateValue(l))
     .reduce((a, c) => a + c)
 );
-

@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const input = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/7
 
@@ -46,4 +44,3 @@ console.log('required', 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))
 console.log('Bonus', Math.min(...folders.filter((f) => f.size >= 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))).map((e) => e.size)));
 
 // returns 8701334, correct answer is 7421137 - what am I missing?
-

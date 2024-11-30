@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const moves = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const moves = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/5
 
@@ -63,4 +61,3 @@ moves
   .map((move) => move.replace('move ', '').replace(' from ', ',').replace(' to ', ',').split(','))
   .forEach((move) => makeBonusMove(move));
 console.log('Result of day 5, part 2: ', bonusStacks.map((stack) => stack[stack.length - 1]).join(''));
-

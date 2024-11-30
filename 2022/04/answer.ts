@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const input = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/4
 
@@ -54,4 +52,3 @@ console.log(
         (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
     ).length
 );
-

@@ -52,3 +52,12 @@ I have a puzzle idea! Can I send it to you? Please don't. Because of legal issue
 Did I find a bug with a puzzle? Once a puzzle has been out for even an hour, many people have already solved it; after that point, bugs are very unlikely. Start by asking on the subreddit.
 
 Can I stream my solution? Please try to avoid giving away the solution while people are competing. If a puzzle's global daily leaderboard isn't full yet and you're likely to get points, please wait to stream/post your solution until after that leaderboard is full. If you are unlikely to get points or the daily leaderboard is already full for the puzzle you're working on, streaming is fine.
+
+
+## Future
+
+- Add solution config
+- Split answers in two parts
+- Test answers against correct solutions
+- Display test results in a better way
+- Fix last ts bugs

@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const input = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/2
 
@@ -12,7 +10,7 @@ const input = await fs.readFile('input.txt', 'utf-8');
  * @param {string} input A string containing A-C in first and X-Z in second position.
  * @returns {number} A number matching the result value of a rock-paper-scissors game.
  */
-function calcResult(input) {
+function calcResult(input: any) {
   // A: Rock, B: Paper, C: Scissors
   // X: Rock, Y: Paper, Z: Scissors
   // 0: Loss, 3: Draw, 6: Win
@@ -28,7 +26,8 @@ function calcResult(input) {
     CY: 2,
     CZ: 6,
   };
-  return result[input];
+  const key = input as keyof typeof result;
+  return result[key];
 }
 
 console.log(
@@ -46,7 +45,7 @@ console.log(
  * @param {string} input A string containing A-C in first and X-Z in second position.
  * @returns {number} A number matching the result value of a rock-paper-scissors game.
  */
-function calcBonusResult(input) {
+function calcBonusResult(input: string) {
   // A: Rock, B: Paper, C: Scissors
   // X: Lose, Y: Draw, Z: Win
   // 0: Loss, 3: Draw, 6: Win
@@ -62,7 +61,8 @@ function calcBonusResult(input) {
     CY: 6,
     CZ: 7,
   };
-  return bonusResult[input];
+  const key = input as keyof typeof bonusResult;
+  return bonusResult[key];
 }
 
 console.log(
@@ -72,4 +72,3 @@ console.log(
     .map((line) => line.replace(' ', ''))
     .reduce((a, c) => a + calcBonusResult(c), 0)
 );
-

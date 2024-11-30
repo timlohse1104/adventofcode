@@ -1,8 +1,6 @@
-'use strict';
-
-import * as fs from 'fs/promises';
-
-const input = await fs.readFile('input.txt', 'utf-8');
+const decoder = new TextDecoder("utf-8");
+const data = Deno.readFileSync(new URL("input.txt", import.meta.url).pathname);
+const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/8
 
@@ -60,4 +58,3 @@ const calcScenicScoreOfRow = (r, y, g) =>
     return getDirectionCount(t, n.left) * getDirectionCount(t, n.right) * getDirectionCount(t, n.top) * getDirectionCount(t, n.bottom);
   });
 console.log('Bonus', Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat()));
-
