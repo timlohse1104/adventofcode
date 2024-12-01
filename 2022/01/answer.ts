@@ -42,4 +42,5 @@ const solution2 = input
 .slice(0, 3)
 .reduce((a, c) => a + c, 0);
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

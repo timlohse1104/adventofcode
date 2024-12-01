@@ -67,4 +67,5 @@ const solution2 = input
 .map((line) => line.replace(' ', ''))
 .reduce((a, c) => a + calcBonusResult(c), 0);
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

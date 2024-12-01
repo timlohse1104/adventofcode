@@ -47,4 +47,5 @@ const solution2 = input
     (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
 ).length;
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

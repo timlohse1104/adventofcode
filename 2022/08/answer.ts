@@ -60,4 +60,5 @@ const calcScenicScoreOfRow = (r, y, g) =>
 
 const solution2 =   Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat())
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

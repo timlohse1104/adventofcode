@@ -42,4 +42,5 @@ input
       if (a.size === 14) return (solution2 = f.indexOf(a) + 14);
     });
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

@@ -62,4 +62,5 @@ moves
   .forEach((move) => makeBonusMove(move));
 const solution2 = bonusStacks.map((stack) => stack[stack.length - 1]).join('');
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

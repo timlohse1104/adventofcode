@@ -47,4 +47,5 @@ const solution2 = result
 .map((l) => calculateDuplicateValue(l))
 .reduce((a, c) => a + c);
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);

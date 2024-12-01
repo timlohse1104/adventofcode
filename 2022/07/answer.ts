@@ -45,4 +45,5 @@ const solution2 = Math.min(...folders.filter((f) => f.size >= 30000000 - (700000
 
 // returns 8701334, correct answer is 7421137 - what am I missing?
 
+// Answer
 console.log([`${solution1}`, `${solution2}`]);
