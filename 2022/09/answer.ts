@@ -58,4 +58,4 @@ function calcTailHistory(movements) {
 const tailHistory = calcTailHistory(movements);
 const solution1 = tailHistory.size;
 
-console.log([`${solution1}`, ""]);
+console.log([`${solution1}`]);

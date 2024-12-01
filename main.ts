@@ -63,11 +63,15 @@ years.forEach( year =>  {
       console.error("stderr", new TextDecoder().decode(stderr))
     } else {
       console.log(`\nRunning test for day ${day}`);
-      const dayResult = new TextDecoder().decode(stdout).replaceAll("\n", "").replaceAll(" ", "").trim();
+      const dayResult = JSON.parse(new TextDecoder().decode(stdout)); //.replaceAll("\n", "").replaceAll(" ", "").trim()
       try {
-        const solution = JSON.stringify((solutions as any)[year][day]);
-        assertEquals(dayResult, solution);
-        console.log(`Day ${day} passed the test. Correct values are: ${solution}`);
+        const solutionsOfTheDay = (solutions as any)[year][day];
+
+        dayResult.forEach( (answer, index) => {
+          const partSolution = solutionsOfTheDay[index];
+          assertEquals(answer, partSolution);
+          console.log(`Day ${day} Part ${index + 1} passed the test. Correct values are: ${partSolution}`);
+        })
       } catch(e) {
         console.error(e);
       }
