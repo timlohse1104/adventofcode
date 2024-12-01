@@ -26,29 +26,25 @@ const input = decoder.decode(data);
 //     .filter((e) => e[1].includes(e[0]) || e[0].includes(e[1])).length
 // );
 
-console.log(
-  'Result of day 4, part 1: ',
-  input
-    .split('\n')
-    .map((l) => l.split(',').map((s) => s.split('-')))
-    .filter(
-      (l) =>
-        (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
-        (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
-    ).length
-);
+const solution1 = input
+.split('\n')
+.map((l) => l.split(',').map((s) => s.split('-')))
+.filter(
+  (l) =>
+    (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
+    (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
+).length;
 
 // Bonus
-console.log(
-  'Result of day 4, part 2: ',
-  input
-    .split('\n')
-    .map((l) => l.split(',').map((s) => s.split('-')))
-    .filter(
-      (l) =>
-        (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][0]) <= Number(l[1][1])) ||
-        (Number(l[0][1]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
-        (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][0]) <= Number(l[0][1])) ||
-        (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
-    ).length
-);
+const solution2 = input
+.split('\n')
+.map((l) => l.split(',').map((s) => s.split('-')))
+.filter(
+  (l) =>
+    (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][0]) <= Number(l[1][1])) ||
+    (Number(l[0][1]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
+    (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][0]) <= Number(l[0][1])) ||
+    (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
+).length;
+
+console.log([`${solution1}`, `${solution2}`]);

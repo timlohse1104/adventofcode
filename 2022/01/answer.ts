@@ -19,31 +19,27 @@ const input = decoder.decode(data);
 //console.log(foo.sort().reverse()[0]);
 
 // Good solution
-console.log(
-  'Result of day 1, part 1: ',
-  Math.max(
-    ...input.split('\n\n').map((line) =>
-      line
-        .split('\n')
-        .map((s) => Number(s))
-        .reduce((a, c) => a + c, 0)
-    )
+const solution1 =  Math.max(
+  ...input.split('\n\n').map((line) =>
+    line
+      .split('\n')
+      .map((s) => Number(s))
+      .reduce((a, c) => a + c, 0)
   )
 );
 
 // Bonus
-console.log(
-  'Result of day 1, part 2: ',
-  input
-    .split('\n\n')
-    .map((line) =>
-      line
-        .split('\n')
-        .map((s) => Number(s))
-        .reduce((a, c) => a + c, 0)
-    )
-    .sort()
-    .reverse()
-    .slice(0, 3)
+const solution2 = input
+.split('\n\n')
+.map((line) =>
+  line
+    .split('\n')
+    .map((s) => Number(s))
     .reduce((a, c) => a + c, 0)
-);
+)
+.sort()
+.reverse()
+.slice(0, 3)
+.reduce((a, c) => a + c, 0);
+
+console.log([`${solution1}`, `${solution2}`]);

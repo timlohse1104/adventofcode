@@ -30,13 +30,10 @@ function calcResult(input: any) {
   return result[key];
 }
 
-console.log(
-  'Result of day 2, part 1: ',
-  input
-    .split('\n')
-    .map((line) => line.replace(' ', ''))
-    .reduce((a, c) => a + calcResult(c), 0)
-);
+const solution1 = input
+.split('\n')
+.map((line) => line.replace(' ', ''))
+.reduce((a, c) => a + calcResult(c), 0);
 
 // Bonus
 /**
@@ -65,10 +62,9 @@ function calcBonusResult(input: string) {
   return bonusResult[key];
 }
 
-console.log(
-  'Result of day 2, part 2: ',
-  input
-    .split('\n')
-    .map((line) => line.replace(' ', ''))
-    .reduce((a, c) => a + calcBonusResult(c), 0)
-);
+const solution2 = input
+.split('\n')
+.map((line) => line.replace(' ', ''))
+.reduce((a, c) => a + calcBonusResult(c), 0);
+
+console.log([`${solution1}`, `${solution2}`]);

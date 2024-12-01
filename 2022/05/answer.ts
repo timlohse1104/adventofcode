@@ -32,7 +32,7 @@ moves
   .filter((move) => move.match(/m+/))
   .map((move) => move.replace('move ', '').replace(' from ', ',').replace(' to ', ',').split(','))
   .forEach((move) => makeMove(move));
-console.log('Result of day 5, part 1: ', stacks.map((stack) => stack[stack.length - 1]).join(''));
+const solution1 = stacks.map((stack) => stack[stack.length - 1]).join('');
 
 // Bonus
 const bonusStacks = [
@@ -60,4 +60,6 @@ moves
   .filter((move) => move.match(/m+/))
   .map((move) => move.replace('move ', '').replace(' from ', ',').replace(' to ', ',').split(','))
   .forEach((move) => makeBonusMove(move));
-console.log('Result of day 5, part 2: ', bonusStacks.map((stack) => stack[stack.length - 1]).join(''));
+const solution2 = bonusStacks.map((stack) => stack[stack.length - 1]).join('');
+
+console.log([`${solution1}`, `${solution2}`]);

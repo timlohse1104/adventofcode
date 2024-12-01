@@ -29,14 +29,10 @@ const calculateDuplicateValue = (l) => {
     return a + ((l.length === 3 ? l[1].includes(c) && l[2].includes(c) : l[1].includes(c)) ? getPriority(c) : 0);
   }, 0);
 };
-
-console.log(
-  'Result of day 3, part 1: ',
-  input
-    .split('\n')
-    .map((line) => `${line.slice(0, line.length / 2)},${line.slice(line.length / 2)}`.split(','))
-    .reduce((a, c) => a + calculateDuplicateValue(c), 0)
-);
+const solution1 = input
+.split('\n')
+.map((line) => `${line.slice(0, line.length / 2)},${line.slice(line.length / 2)}`.split(','))
+.reduce((a, c) => a + calculateDuplicateValue(c), 0);
 
 // Bonus
 const lines = input.split('\n');
@@ -46,10 +42,9 @@ const result = lines.map((line) => {
   tempArr.push(line);
   if (tempArr.length === 3) return tempArr;
 });
-console.log(
-  'Result of day 3, part 2: ',
-  result
-    .filter((l) => l)
-    .map((l) => calculateDuplicateValue(l))
-    .reduce((a, c) => a + c)
-);
+const solution2 = result
+.filter((l) => l)
+.map((l) => calculateDuplicateValue(l))
+.reduce((a, c) => a + c);
+
+console.log([`${solution1}`, `${solution2}`]);

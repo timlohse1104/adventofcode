@@ -4,23 +4,20 @@ const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/6
 
-let foundAt;
-
+let solution1;
 // I need to offset the index by 4 because the first 4 characters are not part of the solution.
-console.log(
-  input
+input
     .split('')
     .map((c, i, a) => new Set([c, a[i + 1], a[i + 2], a[i + 3]]))
     .find((a, i, f) => {
-      if (a.size === 4) return (foundAt = f.indexOf(a) + 4);
-    }),
-  foundAt
-);
+      if (a.size === 4) return (solution1 = f.indexOf(a) + 4);
+    });
+
 
 // Bonus
+let solution2;
 // I need to offset the index by 14 because the first 4 characters are not part of the solution.
-console.log(
-  input
+input
     .split('')
     .map(
       (c, i, a) =>
@@ -42,7 +39,7 @@ console.log(
         ])
     )
     .find((a, i, f) => {
-      if (a.size === 14) return (foundAt = f.indexOf(a) + 14);
-    }),
-  foundAt
-);
+      if (a.size === 14) return (solution2 = f.indexOf(a) + 14);
+    });
+
+console.log([`${solution1}`, `${solution2}`]);

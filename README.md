@@ -56,8 +56,8 @@ Can I stream my solution? Please try to avoid giving away the solution while peo
 
 ## Future
 
-- Add solution config
-- Split answers in two parts
-- Test answers against correct solutions
-- Display test results in a better way
-- Fix last ts bugs
+- Split answers in two parts.
+- Test answers against correct solutions, use: https://docs.deno.com/runtime/fundamentals/testing/.
+- Display test results in a better way.
+- Fix last ts bugs.
+- Refactor test code to call function inside of answer.ts file not execute deno run commands and parse output.

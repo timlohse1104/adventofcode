@@ -32,7 +32,7 @@ const folders = input
     });
     return d;
   });
-console.log(folders.reduce((a, c) => a + (c.size <= 100000 ? c.size : 0), 0));
+const solution1 = folders.reduce((a, c) => a + (c.size <= 100000 ? c.size : 0), 0);
 
 // Bonus
 const sizes = input
@@ -40,7 +40,9 @@ const sizes = input
   .filter((l) => /\d+/.test(l))
   .map((l) => Number(l.replace(/\s\w+.\w+/, '')))
   .filter((l) => l.name !== '');
-console.log('required', 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0)));
-console.log('Bonus', Math.min(...folders.filter((f) => f.size >= 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))).map((e) => e.size)));
+// console.log('required', 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0)));
+const solution2 = Math.min(...folders.filter((f) => f.size >= 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))).map((e) => e.size));
 
 // returns 8701334, correct answer is 7421137 - what am I missing?
+
+console.log([`${solution1}`, `${solution2}`]);

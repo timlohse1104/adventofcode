@@ -36,7 +36,7 @@ const getRowExposedCount = (r, y, g) => {
   return foo;
 };
 
-console.log(grid.reduce((a, c, y, g) => a + getRowExposedCount(c, y, g), 0));
+const solution1 = grid.reduce((a, c, y, g) => a + getRowExposedCount(c, y, g), 0);
 
 // Bonus
 const getDirectionCount = (t, d) => {
@@ -57,4 +57,7 @@ const calcScenicScoreOfRow = (r, y, g) =>
     const n = getNeighbors(g, x, y);
     return getDirectionCount(t, n.left) * getDirectionCount(t, n.right) * getDirectionCount(t, n.top) * getDirectionCount(t, n.bottom);
   });
-console.log('Bonus', Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat()));
+
+const solution2 =   Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat())
+
+console.log([`${solution1}`, `${solution2}`]);

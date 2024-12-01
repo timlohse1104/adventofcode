@@ -1,3 +1,6 @@
+import { assertEquals } from "jsr:@std/assert";
+import { solutions } from './solutions.ts';
+
 // https://onlineasciitools.com/convert-text-to-ascii-art - banner4
 const startupMessage = {
   title: `
@@ -42,13 +45,13 @@ years.forEach( year =>  {
   days.sort((a, b) => parseInt(a) - parseInt(b));
 
   days.forEach(day => {
-    console.log(`Running task for day ${day}`);
+    if (!(solutions as any)[year][day]) return;
 
     const command = new Deno.Command(Deno.execPath(), {
       args: [
         "run",
         "--allow-read",
-        `${year}/${day}/solution.ts`,
+        `${year}/${day}/answer.ts`,
       ],
       stdout: "piped",
       stderr: "piped"
@@ -56,9 +59,19 @@ years.forEach( year =>  {
 
     const { code, stdout, stderr } = command.outputSync();
 
-    code === 0 ?
-    console.log("stdout", new TextDecoder().decode(stdout)) :
-    console.log("stderr", new TextDecoder().decode(stderr));
+    if(code === 1) {
+      console.error("stderr", new TextDecoder().decode(stderr))
+    } else {
+      console.log(`\nRunning test for day ${day}`);
+      const dayResult = new TextDecoder().decode(stdout).replaceAll("\n", "").replaceAll(" ", "").trim();
+      try {
+        const solution = JSON.stringify((solutions as any)[year][day]);
+        assertEquals(dayResult, solution);
+        console.log(`Day ${day} passed the test. Correct values are: ${solution}`);
+      } catch(e) {
+        console.error(e);
+      }
+    };
   });
   days = [];
 });
