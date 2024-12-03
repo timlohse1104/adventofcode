@@ -1,4 +1,3 @@
-import { assertEquals } from "jsr:@std/assert";
 import { solutions } from './solutions.ts';
 
 // https://onlineasciitools.com/convert-text-to-ascii-art - banner4
@@ -69,8 +68,7 @@ years.forEach( year =>  {
 
         dayResult.forEach( (answer, index) => {
           const partSolution = solutionsOfTheDay[index];
-          assertEquals(answer, partSolution);
-          console.log(`\x1b[32mDay ${day} Part ${index + 1} passed the test.\x1b[0m Correct value: ${partSolution}`);
+          answer === partSolution ? console.log(`\x1b[32mDay ${day} Part ${index + 1} passed the test.\x1b[0m Correct value: ${partSolution}`) : console.error(`\x1b[31mDay ${day} Part ${index + 1} failed the test. \x1b[31m${answer} (actual)\x1b[0m / \x1b[32m${partSolution} (expected)\x1b[0m`);
         })
       } catch(e) {
         console.error(e);
