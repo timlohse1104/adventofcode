@@ -18,7 +18,7 @@ const input = decoder.decode(data);
 // }
 //console.log(foo.sort().reverse()[0]);
 
-// Good solution
+// Part 1
 const solution1 =  Math.max(
   ...input.split('\n\n').map((line) =>
     line
@@ -28,7 +28,7 @@ const solution1 =  Math.max(
   )
 );
 
-// Bonus
+// Part 2
 const solution2 = input
 .split('\n\n')
 .map((line) =>

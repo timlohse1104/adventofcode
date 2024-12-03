@@ -30,18 +30,12 @@ function calcResult(input: any) {
   return result[key];
 }
 
-const solution1 = input
-.split('\n')
-.map((line) => line.replace(' ', ''))
-.reduce((a, c) => a + calcResult(c), 0);
-
-// Bonus
 /**
  * Matches the input to the resulting value.
- *
- * @param {string} input A string containing A-C in first and X-Z in second position.
- * @returns {number} A number matching the result value of a rock-paper-scissors game.
- */
+*
+* @param {string} input A string containing A-C in first and X-Z in second position.
+* @returns {number} A number matching the result value of a rock-paper-scissors game.
+*/
 function calcBonusResult(input: string) {
   // A: Rock, B: Paper, C: Scissors
   // X: Lose, Y: Draw, Z: Win
@@ -62,6 +56,13 @@ function calcBonusResult(input: string) {
   return bonusResult[key];
 }
 
+// Part 1
+const solution1 = input
+.split('\n')
+.map((line) => line.replace(' ', ''))
+.reduce((a, c) => a + calcResult(c), 0);
+
+// Part 2
 const solution2 = input
 .split('\n')
 .map((line) => line.replace(' ', ''))

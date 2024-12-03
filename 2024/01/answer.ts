@@ -18,9 +18,10 @@ for (let i = 0; i < distances.length; i++) {
   }
 }
 const sortedDistances = [firstHalf.sort(), secondHalf.sort()];
+
+// Part 1
 const solution1 = sortedDistances[0].reduce((acc, firstDistance, index) => acc + getLineDistance(firstDistance, sortedDistances[1][index]),0);
 
-// Bonus
 const calcSimilarityScore = (digit: number, compareList: number[]) => {
   return compareList.reduce((acc, value) => {
     if(value === digit) acc++;
@@ -28,6 +29,7 @@ const calcSimilarityScore = (digit: number, compareList: number[]) => {
   }, 0) * digit;
 }
 
+// Part 2
 const solution2 = firstHalf.reduce((acc, value) => acc + calcSimilarityScore(value, secondHalf),0);
 
 // Answer

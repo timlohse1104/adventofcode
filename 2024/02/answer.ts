@@ -41,6 +41,7 @@ const checkReportWithOneRemoval = (report: number[]): boolean => {
   return false;
 };
 
+// Part 1
 const solution1 = reports.reduce((acc, report) => {
   const reportSign = Math.sign(report[0] - report[1]);
   if (reportSign !== 0 && checkReportSafety(report, reportSign)) {
@@ -49,7 +50,7 @@ const solution1 = reports.reduce((acc, report) => {
   return acc;
 }, 0);
 
-// Bonus
+// Part 2
 const solution2 = reports.reduce((acc, report) => {
   if (checkReportWithOneRemoval(report)) {
     acc++;

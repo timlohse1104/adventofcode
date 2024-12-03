@@ -29,12 +29,14 @@ const calculateDuplicateValue = (l) => {
     return a + ((l.length === 3 ? l[1].includes(c) && l[2].includes(c) : l[1].includes(c)) ? getPriority(c) : 0);
   }, 0);
 };
+
+// Part 1
 const solution1 = input
 .split('\n')
 .map((line) => `${line.slice(0, line.length / 2)},${line.slice(line.length / 2)}`.split(','))
 .reduce((a, c) => a + calculateDuplicateValue(c), 0);
 
-// Bonus
+// Part 2
 const lines = input.split('\n');
 let tempArr = [];
 const result = lines.map((line) => {

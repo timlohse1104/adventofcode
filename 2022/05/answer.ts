@@ -32,9 +32,10 @@ moves
   .filter((move) => move.match(/m+/))
   .map((move) => move.replace('move ', '').replace(' from ', ',').replace(' to ', ',').split(','))
   .forEach((move) => makeMove(move));
+
+// Part 1
 const solution1 = stacks.map((stack) => stack[stack.length - 1]).join('');
 
-// Bonus
 const bonusStacks = [
   ['L', 'N', 'W', 'T', 'D'],
   ['C', 'P', 'H'],
@@ -60,6 +61,8 @@ moves
   .filter((move) => move.match(/m+/))
   .map((move) => move.replace('move ', '').replace(' from ', ',').replace(' to ', ',').split(','))
   .forEach((move) => makeBonusMove(move));
+
+// Part 2
 const solution2 = bonusStacks.map((stack) => stack[stack.length - 1]).join('');
 
 // Answer

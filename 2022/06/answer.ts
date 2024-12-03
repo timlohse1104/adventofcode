@@ -4,6 +4,7 @@ const input = decoder.decode(data);
 
 // Solution for https://adventofcode.com/2022/day/6
 
+// Part 1
 let solution1;
 // I need to offset the index by 4 because the first 4 characters are not part of the solution.
 input
@@ -14,7 +15,7 @@ input
     });
 
 
-// Bonus
+// Part 2
 let solution2;
 // I need to offset the index by 14 because the first 4 characters are not part of the solution.
 input

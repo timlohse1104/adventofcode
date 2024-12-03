@@ -56,6 +56,8 @@ function calcTailHistory(movements) {
   return tailHistory;
 }
 const tailHistory = calcTailHistory(movements);
+
+// Part 1
 const solution1 = tailHistory.size;
 
 // Answer

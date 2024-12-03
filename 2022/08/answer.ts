@@ -36,9 +36,9 @@ const getRowExposedCount = (r, y, g) => {
   return foo;
 };
 
+// Part 1
 const solution1 = grid.reduce((a, c, y, g) => a + getRowExposedCount(c, y, g), 0);
 
-// Bonus
 const getDirectionCount = (t, d) => {
   let count = 0;
   d.every((e) => {
@@ -58,6 +58,7 @@ const calcScenicScoreOfRow = (r, y, g) =>
     return getDirectionCount(t, n.left) * getDirectionCount(t, n.right) * getDirectionCount(t, n.top) * getDirectionCount(t, n.bottom);
   });
 
+// Part 2
 const solution2 =   Math.max(...grid.map((r, y, g) => calcScenicScoreOfRow(r, y, g)).flat())
 
 // Answer
