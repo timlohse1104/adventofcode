@@ -13,12 +13,11 @@ type Direction = {
   x: number;
   y: number;
 }
-
 const letterMatrix = input.split('\n').map(line => line.split(''));
 const targetWord = "XMAS";
 const targetWordArray = targetWord.split('');
 /* All possible directions:
-* top-center,
+* top-center
 * top-right
 * center-right
 * bottom-right
@@ -56,14 +55,58 @@ const searchValidWordsFromPosition = (letterPos: Position): number => {
   return directions.reduce((acc, direction) => acc + (isWordInDirection(letterPos, direction) ? 1 : 0), 0);
 }
 
-console.log(letterMatrix.reduce((acc, line, lineIndex) =>
-  acc + line.reduce((acc, letter, letterIndex) => acc + (isValidFirstLetter(letter) ? searchValidWordsFromPosition({y: lineIndex, x: letterIndex}): 0), 0), 0));
-
 // Part 1
-const solution1 = '';
+const solution1 = letterMatrix.reduce((acc, line, lineIndex) =>
+  acc + line.reduce((acc, letter, letterIndex) => acc + (isValidFirstLetter(letter) ? searchValidWordsFromPosition({y: lineIndex, x: letterIndex}): 0), 0), 0);
+
+const targetXWord = "MAS";
+const targetXWordArray = targetXWord.split('');
+
+const isDiagonalXWord = (center: Position): boolean => {
+  const topLeft = { x: center.x - 1, y: center.y - 1 };
+  const bottomRight = { x: center.x + 1, y: center.y + 1 };
+  const topRight = { x: center.x + 1, y: center.y - 1 };
+  const bottomLeft = { x: center.x - 1, y: center.y + 1 };
+
+  if (!isLetterInBounds(topLeft) || !isLetterInBounds(bottomRight) ||
+      !isLetterInBounds(topRight) || !isLetterInBounds(bottomLeft)) {
+    return false;
+  }
+
+  const diagonal1 = [
+    letterMatrix[topLeft.y][topLeft.x],
+    letterMatrix[center.y][center.x],
+    letterMatrix[bottomRight.y][bottomRight.x]
+  ];
+
+  const diagonal2 = [
+    letterMatrix[topRight.y][topRight.x],
+    letterMatrix[center.y][center.x],
+    letterMatrix[bottomLeft.y][bottomLeft.x]
+  ];
+
+  const isValidXWord = (letters: string[]): boolean => {
+    return (
+      letters.join('') === targetXWord || letters.reverse().join('') === targetXWord
+    );
+  };
+
+  return isValidXWord(diagonal1) && isValidXWord(diagonal2);
+};
+const isValidFirstXLetter = (letter: string) => {
+  return targetXWordArray[1] === letter;
+}
 
 // Part 2
-const solution2 = '';
+const solution2 = letterMatrix.reduce((acc, line, lineIndex) =>
+  acc + line.reduce((acc, letter, letterIndex) => {
+    const center: Position = { y: lineIndex, x: letterIndex };
+    let validWordCount = 0;
+    if(isValidFirstXLetter(letter)) {
+      if(isDiagonalXWord(center)) validWordCount++;
+    }
+    return acc + validWordCount
+  }, 0), 0);
 
 // Answer
 console.log([`${solution1}`, `${solution2}`]);
