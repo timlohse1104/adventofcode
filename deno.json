@@ -1,6 +1,7 @@
 {
   "tasks": {
-    "start": "deno run --allow-read --allow-run main.ts"
+    "start": "deno run --allow-read --allow-run main.ts",
+    "bootstrap": "deno run --allow-write --allow-read scripts/bootstrap-folder.ts"
   },
   "imports": {}
 }
