@@ -4,6 +4,20 @@ https://adventofcode.com/
 
 ## Technical project information
 
+### Tools
+
+1. Run all deno answers against the solutions and see if they are correct or not.
+
+```
+deno task start
+```
+
+2. Add another basic folder structure for a specific year and day.
+
+```
+deno task bootstraß <year> <day>
+```
+
 ### Installation
 
 Clone the repository:
