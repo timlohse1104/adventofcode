@@ -46,41 +46,69 @@ function calculateSumOfMiddlePages(input: string): number {
   return sum;
 }
 
+function topologicalSort(update: number[], rules: [number, number][]): number[] {
+  const graph = new Map<number, number[]>();
+  const inDegree = new Map<number, number>();
 
-const inputMock = `47|53
-97|13
-97|61
-97|47
-75|29
-61|13
-75|53
-29|13
-97|29
-53|29
-61|53
-97|53
-61|29
-47|13
-75|47
-97|75
-47|61
-75|61
-47|29
-75|13
-53|13
+  // Initialize the graph and in-degree map
+  for (const page of update) {
+      graph.set(page, []);
+      inDegree.set(page, 0);
+  }
 
-75,47,61,53,29
-97,61,53,29,13
-75,29,13
-75,97,47,61,53
-61,13,29
-97,13,75,29,47`;
+  // Build the graph and update in-degrees
+  for (const [x, y] of rules) {
+      if (graph.has(x) && graph.has(y)) {
+          graph.get(x)!.push(y);
+          inDegree.set(y, inDegree.get(y)! + 1);
+      }
+  }
+
+  const queue: number[] = [];
+
+  // Enqueue pages with zero in-degree
+  for (const [page, degree] of inDegree.entries()) {
+      if (degree === 0) {
+          queue.push(page);
+      }
+  }
+
+  const sorted: number[] = [];
+
+  while (queue.length > 0) {
+      const page = queue.shift()!;
+      sorted.push(page);
+
+      for (const neighbor of graph.get(page)!) {
+          inDegree.set(neighbor, inDegree.get(neighbor)! - 1);
+          if (inDegree.get(neighbor) === 0) {
+              queue.push(neighbor);
+          }
+      }
+  }
+
+  return sorted;
+}
+
+function calculateSumOfMiddlePagesForIncorrectUpdates(input: string): number {
+  const { rules, updates } = parseInput(input);
+  let sum = 0;
+
+  for (const update of updates) {
+      if (!isOrdered(update, rules)) {
+          const orderedUpdate = topologicalSort(update, rules);
+          sum += findMiddleElement(orderedUpdate);
+      }
+  }
+
+  return sum;
+}
 
 // Solution for Part 1
 const solution1 = calculateSumOfMiddlePages(input);
 
 // Solution for Part 2
-const solution2 = '';
+const solution2 = calculateSumOfMiddlePagesForIncorrectUpdates(input);
 
 // Answer
 console.log([`${solution1}`, `${solution2}`]);
