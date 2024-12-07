@@ -15,7 +15,7 @@ const encoder = new TextEncoder();
 // ........#.
 // #.........
 // ......#...`.split('\n').map(line => line.split(''));
-const positionMap = input.split('\n').map(line => line.split(''));
+const partOneInput = input.split('\n').map(line => line.split(''));
 
 type Position = {
   x: number;
@@ -43,7 +43,7 @@ const traveledPosChar = 'X';
  * @param position The position to check.
  * @returns boolean indicating if the position is within bounds.
  */
-const isInBounds = (position: Position) => {
+const isInBounds = (position: Position, positionMap: string[][]): boolean => {
   return  position.x >= 0 && position.x < positionMap.length && position.y >= 0 && position.y < positionMap[0].length
 }
 
@@ -54,11 +54,11 @@ const isInBounds = (position: Position) => {
  * @param newPos The new position of the pointer to move to.
  * @param direction The pointer direction the pointer is moving in.
  */
-const movePointer = (oldPos: Position, direction: Direction): Position => {
+const movePointer = (oldPos: Position, direction: Direction, positionMap: string[][]): {pos: Position, map: string[][]} => {
   positionMap[oldPos.y][oldPos.x] = traveledPosChar;
 
   const newPos: Position = {x: oldPos.x + direction.x, y: oldPos.y + direction.y};
-  if (isInBounds(newPos) && positionMap[newPos.y][newPos.x] !== collisionChar) {
+  if (isInBounds(newPos, positionMap) && positionMap[newPos.y][newPos.x] !== collisionChar) {
     switch (direction.key) {
       case 'right':
         positionMap[newPos.y][newPos.x] = rightDirection.char;
@@ -74,7 +74,7 @@ const movePointer = (oldPos: Position, direction: Direction): Position => {
         break;
     }
   }
-  return newPos;
+  return {pos: newPos, map: positionMap};
 }
 
 /**
@@ -103,7 +103,7 @@ const rotateDirection = (direction: Direction): Direction => {
  * @param direction The current direction of the pointer.
  * @returns The next pointer direction after evaluating the current map character.
  */
-const getNextPointerDirection = (position: Position, direction: Direction): Direction => {
+const getNextPointerDirection = (position: Position, direction: Direction, positionMap: string[][]): Direction => {
   const nextPos = {x: position.x + direction.x, y: position.y + direction.y};
   const nextChar = positionMap[nextPos.y]?.[nextPos.x];
 
@@ -119,7 +119,7 @@ const getNextPointerDirection = (position: Position, direction: Direction): Dire
  * @param pointerPos Current pointer position.
  * @returns The parsed direction based on the current map character.
  */
-const parsePointerDirection = (pointerPos: Position): Direction => {
+const parsePointerDirection = (pointerPos: Position, positionMap: string[][]): Direction => {
   const currentChar = positionMap[pointerPos.y][pointerPos.x];
   switch (currentChar) {
     case rightDirection.char:
@@ -138,7 +138,7 @@ const parsePointerDirection = (pointerPos: Position): Direction => {
  *
  * @returns The number of traveled locations as marked on the map.
  */
-const getTraveledLocationCount = (): number => {
+const getTraveledLocationCount = (positionMap: string[][]): number => {
   return positionMap.reduce((count, row) => count + row.filter(char => char === traveledPosChar).length, 0);
 }
 
@@ -147,7 +147,7 @@ const getTraveledLocationCount = (): number => {
  *
  * @returns position of the pointer's starting location or null if not found.
  */
-const getPointerStartPos = (): Position | null => {
+const getPointerStartPos = (positionMap: string[][]): Position | null => {
   let pointerPos: Position | null = null;
   positionMap.some((row, rowIndex) => {
     const upColumIndex = row.indexOf(upDirection.char)
@@ -159,28 +159,29 @@ const getPointerStartPos = (): Position | null => {
 /**
  *  Simulates the pointer movement in the position map by continuously updating its position and direction until a stopping condition is met.
  */
-const simulatePointerMovement = () => {
-  let pointerPos = getPointerStartPos();
+const simulatePointerMovement = (positionMap: string[][]): string[][] => {
+  let pointerPos = getPointerStartPos(positionMap);
   if(!pointerPos) throw new Error('Pointer start position could not be found!');
 
-  while(isInBounds(pointerPos)) {
-    const direction = parsePointerDirection(pointerPos);
-    const nextDirection = getNextPointerDirection(pointerPos, direction);
+  let traversedMap: string[][] = [];
+  while(isInBounds(pointerPos as Position, positionMap)) {
+    const direction = parsePointerDirection(pointerPos as Position, positionMap);
+    const nextDirection = getNextPointerDirection(pointerPos as Position, direction, positionMap);
 
-    const newPointerPos = movePointer(pointerPos, nextDirection);
+    const moveOutput = movePointer(pointerPos as Position, nextDirection, positionMap);
+    traversedMap = moveOutput.map;
+
 
     // Set pointer pos to not risk endlessly looping!
-    pointerPos = newPointerPos;
+    pointerPos = moveOutput.pos;
   }
 
-  return
+  return traversedMap;
 }
 
 
 // Part 1
-simulatePointerMovement();
-Deno.writeFileSync('output.txt', encoder.encode(positionMap.map(row => row.join('')).join('\n')));
-const solution1 = getTraveledLocationCount();
+const solution1 = getTraveledLocationCount(simulatePointerMovement(partOneInput));
 
 // Part 2
 const solution2 = '';
