@@ -19,17 +19,17 @@ const input = decoder.decode(data);
 //console.log(foo.sort().reverse()[0]);
 
 // Part 1
-const solution1 =  Math.max(
+export const part1 =  Math.max(
   ...input.split('\n\n').map((line) =>
     line
       .split('\n')
       .map((s) => Number(s))
       .reduce((a, c) => a + c, 0)
   )
-);
+).toString();
 
 // Part 2
-const solution2 = input
+export const part2 = input
 .split('\n\n')
 .map((line) =>
   line
@@ -40,7 +40,7 @@ const solution2 = input
 .sort()
 .reverse()
 .slice(0, 3)
-.reduce((a, c) => a + c, 0);
+.reduce((a, c) => a + c, 0).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging output for debugging purposes only!
+// console.log([`${part1}`, `${part2}`]);

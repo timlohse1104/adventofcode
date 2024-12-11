@@ -35,7 +35,7 @@ for (const dirEntry of Deno.readDirSync(".")) {
 years.sort((a, b) => parseInt(a) - parseInt(b));
 
 let days: string[] = [];
-years.forEach( year =>  {
+for(const year of years) {
   console.log(startupMessage.year(year));
 
   for (const dirEntry of Deno.readDirSync(year)) {
@@ -43,37 +43,23 @@ years.forEach( year =>  {
   };
   days.sort((a, b) => parseInt(a) - parseInt(b));
 
-  days.forEach(day => {
-    if (!(solutions as any)[year][day]) return;
+  for(const day of days) {
+    if (!(solutions as any)[year][day]) continue;
 
-    const command = new Deno.Command(Deno.execPath(), {
-      args: [
-        "run",
-        "--allow-read",
-        `${year}/${day}/answer.ts`,
-      ],
-      stdout: "piped",
-      stderr: "piped"
-    });
+    const currentDayAnswers =  await import (`./${year}/${day}/answer.ts`);
+    const {part1, part2} = currentDayAnswers.default || currentDayAnswers;
 
-    const { code, stdout, stderr } = command.outputSync();
-
-    if(code === 1) {
-      console.error("stderr", new TextDecoder().decode(stderr))
+    if(!part1 && !part2){
+      console.error(`\x1b[31mNo answers found in ./${year}/${day}/answer.ts\x1b[0m`)
     } else {
       console.log(`\n\x1b[1mRunning test for day ${day}\x1b[0m`);
-      const dayResult = JSON.parse(new TextDecoder().decode(stdout));
-      try {
-        const solutionsOfTheDay = (solutions as any)[year][day];
+      const solutionsOfTheDay = (solutions as any)[year][day];
 
-        dayResult.forEach( (answer, index) => {
-          const partSolution = solutionsOfTheDay[index];
-          answer === partSolution ? console.log(`\x1b[32mDay ${day} Part ${index + 1} passed the test.\x1b[0m Correct value: ${partSolution}`) : console.error(`\x1b[31mDay ${day} Part ${index + 1} failed the test. \x1b[31m${answer} (actual)\x1b[0m / \x1b[32m${partSolution} (expected)\x1b[0m`);
-        })
-      } catch(e) {
-        console.error(e);
-      }
+      [part1, part2].forEach( (answer, index) => {
+        const partSolution = solutionsOfTheDay[index];
+        answer === partSolution ? console.log(`\x1b[32mDay ${day} Part ${index + 1} passed the test.\x1b[0m Correct value: ${partSolution}`) : console.error(`\x1b[31mDay ${day} Part ${index + 1} failed the test. \x1b[31m${answer} (actual)\x1b[0m / \x1b[32m${partSolution} (expected)\x1b[0m`);
+      })
     };
-  });
   days = [];
-});
+  };
+};
