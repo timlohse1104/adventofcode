@@ -181,10 +181,10 @@ const simulatePointerMovement = (positionMap: string[][]): string[][] => {
 
 
 // Part 1
-const solution1 = getTraveledLocationCount(simulatePointerMovement(partOneInput));
+export const part1 = getTraveledLocationCount(simulatePointerMovement(partOneInput)).toString();
 
 // Part 2
-const solution2 = '';
+export const part2 = '';
 
 // Answer
-console.log([`${solution1}`, `${solution2}`]);
+// console.log([`${part1}`, `${part2}`]);

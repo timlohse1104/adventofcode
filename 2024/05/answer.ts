@@ -105,10 +105,10 @@ function calculateSumOfMiddlePagesForIncorrectUpdates(input: string): number {
 }
 
 // Solution for Part 1
-const solution1 = calculateSumOfMiddlePages(input);
+export const part1 = calculateSumOfMiddlePages(input).toString();
 
 // Solution for Part 2
-const solution2 = calculateSumOfMiddlePagesForIncorrectUpdates(input);
+export const part2 = calculateSumOfMiddlePagesForIncorrectUpdates(input).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

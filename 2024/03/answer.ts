@@ -35,10 +35,10 @@ const sequentialParser = (input: string): number => {
 const mulOperations = input.match(globalMulRegex)?.map(mul => mul.match(/\d+,\d+/)?.[0].split(','));
 
 // Part 1
-const solution1 = mulOperations?.reduce((acc, operation) => acc + multiply(operation![0], operation![1]), 0);
+export const part1 = mulOperations?.reduce((acc, operation) => acc + multiply(operation![0], operation![1]), 0).toString();
 
 // Part 2
-const solution2 = sequentialParser(input);
+export const part2 = sequentialParser(input).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

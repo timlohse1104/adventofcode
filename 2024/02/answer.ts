@@ -42,21 +42,21 @@ const checkReportWithOneRemoval = (report: number[]): boolean => {
 };
 
 // Part 1
-const solution1 = reports.reduce((acc, report) => {
+export const part1 = reports.reduce((acc, report) => {
   const reportSign = Math.sign(report[0] - report[1]);
   if (reportSign !== 0 && checkReportSafety(report, reportSign)) {
     acc++;
   }
   return acc;
-}, 0);
+}, 0).toString();
 
 // Part 2
-const solution2 = reports.reduce((acc, report) => {
+export const part2 = reports.reduce((acc, report) => {
   if (checkReportWithOneRemoval(report)) {
     acc++;
   }
   return acc;
-}, 0);
+}, 0).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

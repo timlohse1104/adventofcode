@@ -56,8 +56,8 @@ const searchValidWordsFromPosition = (letterPos: Position): number => {
 }
 
 // Part 1
-const solution1 = letterMatrix.reduce((acc, line, lineIndex) =>
-  acc + line.reduce((acc, letter, letterIndex) => acc + (isValidFirstLetter(letter) ? searchValidWordsFromPosition({y: lineIndex, x: letterIndex}): 0), 0), 0);
+export const part1 = letterMatrix.reduce((acc, line, lineIndex) =>
+  acc + line.reduce((acc, letter, letterIndex) => acc + (isValidFirstLetter(letter) ? searchValidWordsFromPosition({y: lineIndex, x: letterIndex}): 0), 0), 0).toString();
 
 const targetXWord = "MAS";
 const targetXWordArray = targetXWord.split('');
@@ -98,7 +98,7 @@ const isValidFirstXLetter = (letter: string) => {
 }
 
 // Part 2
-const solution2 = letterMatrix.reduce((acc, line, lineIndex) =>
+export const part2 = letterMatrix.reduce((acc, line, lineIndex) =>
   acc + line.reduce((acc, letter, letterIndex) => {
     const center: Position = { y: lineIndex, x: letterIndex };
     let validWordCount = 0;
@@ -106,7 +106,7 @@ const solution2 = letterMatrix.reduce((acc, line, lineIndex) =>
       if(isDiagonalXWord(center)) validWordCount++;
     }
     return acc + validWordCount
-  }, 0), 0);
+  }, 0), 0).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);
