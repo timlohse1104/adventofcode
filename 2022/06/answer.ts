@@ -13,6 +13,7 @@ input
     .find((a, i, f) => {
       if (a.size === 4) return (solution1 = f.indexOf(a) + 4);
     });
+export const part1 = solution1?.toString();
 
 
 // Part 2
@@ -42,6 +43,7 @@ input
     .find((a, i, f) => {
       if (a.size === 14) return (solution2 = f.indexOf(a) + 14);
     });
+export const part2 = solution2?.toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

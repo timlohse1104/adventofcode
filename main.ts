@@ -43,6 +43,11 @@ for(const year of years) {
   };
   days.sort((a, b) => parseInt(a) - parseInt(b));
 
+  if(days.length === 0){
+    console.log('No days to solve in this year.')
+    continue;
+  }
+
   for(const day of days) {
     if (!(solutions as any)[year][day]) continue;
 
@@ -54,12 +59,13 @@ for(const year of years) {
     } else {
       console.log(`\n\x1b[1mRunning test for day ${day}\x1b[0m`);
       const solutionsOfTheDay = (solutions as any)[year][day];
+      const parts = [part1, part2].filter(Boolean);
 
-      [part1, part2].forEach( (answer, index) => {
+      parts.forEach( (answer, index) => {
         const partSolution = solutionsOfTheDay[index];
         answer === partSolution ? console.log(`\x1b[32mDay ${day} Part ${index + 1} passed the test.\x1b[0m Correct value: ${partSolution}`) : console.error(`\x1b[31mDay ${day} Part ${index + 1} failed the test. \x1b[31m${answer} (actual)\x1b[0m / \x1b[32m${partSolution} (expected)\x1b[0m`);
       })
     };
-  days = [];
   };
+  days = [];
 };

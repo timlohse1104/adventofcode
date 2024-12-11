@@ -34,7 +34,7 @@ moves
   .forEach((move) => makeMove(move));
 
 // Part 1
-const solution1 = stacks.map((stack) => stack[stack.length - 1]).join('');
+export const part1 = stacks.map((stack) => stack[stack.length - 1]).join('');
 
 const bonusStacks = [
   ['L', 'N', 'W', 'T', 'D'],
@@ -63,7 +63,7 @@ moves
   .forEach((move) => makeBonusMove(move));
 
 // Part 2
-const solution2 = bonusStacks.map((stack) => stack[stack.length - 1]).join('');
+export const part2 = bonusStacks.map((stack) => stack[stack.length - 1]).join('');
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

@@ -57,16 +57,16 @@ function calcBonusResult(input: string) {
 }
 
 // Part 1
-const solution1 = input
+export const part1 = input
 .split('\n')
 .map((line) => line.replace(' ', ''))
-.reduce((a, c) => a + calcResult(c), 0);
+.reduce((a, c) => a + calcResult(c), 0).toString();
 
 // Part 2
-const solution2 = input
+export const part2 = input
 .split('\n')
 .map((line) => line.replace(' ', ''))
-.reduce((a, c) => a + calcBonusResult(c), 0);
+.reduce((a, c) => a + calcBonusResult(c), 0).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

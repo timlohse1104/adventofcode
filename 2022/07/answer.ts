@@ -34,7 +34,7 @@ const folders = input
   });
 
 // Part 1
-const solution1 = folders.reduce((a, c) => a + (c.size <= 100000 ? c.size : 0), 0);
+export const part1 = folders.reduce((a, c) => a + (c.size <= 100000 ? c.size : 0), 0).toString();
 
 const sizes = input
   .split('\n')
@@ -44,9 +44,9 @@ const sizes = input
 // console.log('required', 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0)));
 
 // Part 2
-const solution2 = Math.min(...folders.filter((f) => f.size >= 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))).map((e) => e.size));
+export const part2 = Math.min(...folders.filter((f) => f.size >= 30000000 - (70000000 - sizes.reduce((a, c) => a + c, 0))).map((e) => e.size)).toString();
 
 // returns 8701334, correct answer is 7421137 - what am I missing?
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

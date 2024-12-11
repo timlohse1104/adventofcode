@@ -5,17 +5,17 @@ const input = decoder.decode(data);
 // Solution for https://adventofcode.com/2022/day/4
 
 // Part 1
-const solution1 = input
+export const part1 = input
 .split('\n')
 .map((l) => l.split(',').map((s) => s.split('-')))
 .filter(
   (l) =>
     (Number(l[0][0]) >= Number(l[1][0]) && Number(l[0][1]) <= Number(l[1][1])) ||
     (Number(l[1][0]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
-).length;
+).length.toString();
 
 // Part 2
-const solution2 = input
+export const part2 = input
 .split('\n')
 .map((l) => l.split(',').map((s) => s.split('-')))
 .filter(
@@ -26,5 +26,5 @@ const solution2 = input
     (Number(l[1][1]) >= Number(l[0][0]) && Number(l[1][1]) <= Number(l[0][1]))
 ).length;
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

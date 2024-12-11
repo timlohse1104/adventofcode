@@ -31,10 +31,10 @@ const calculateDuplicateValue = (l) => {
 };
 
 // Part 1
-const solution1 = input
+export const part1 = input
 .split('\n')
 .map((line) => `${line.slice(0, line.length / 2)},${line.slice(line.length / 2)}`.split(','))
-.reduce((a, c) => a + calculateDuplicateValue(c), 0);
+.reduce((a, c) => a + calculateDuplicateValue(c), 0).toString();
 
 // Part 2
 const lines = input.split('\n');
@@ -44,10 +44,10 @@ const result = lines.map((line) => {
   tempArr.push(line);
   if (tempArr.length === 3) return tempArr;
 });
-const solution2 = result
+export const part2 = result
 .filter((l) => l)
 .map((l) => calculateDuplicateValue(l))
-.reduce((a, c) => a + c);
+.reduce((a, c) => a + c).toString();
 
-// Answer
-console.log([`${solution1}`, `${solution2}`]);
+// Debugging
+// console.log([`${part1}`, `${part2}`]);

@@ -42,5 +42,5 @@ export const part2 = input
 .slice(0, 3)
 .reduce((a, c) => a + c, 0).toString();
 
-// Debugging output for debugging purposes only!
+// Debugging
 // console.log([`${part1}`, `${part2}`]);
