@@ -13,13 +13,13 @@ const input = decoder.decode(data);
 // Solution for https://adventofcode.com/${year}/day/${day}
 
 // Part 1
-const solution1 = '';
+const part1 = '';
 
 // Part 2
-const solution2 = '';
+const part2 = '';
 
-// Answer
-console.log([\`\${solution1}\`, \`\${solution2}\`]);`);
+// Debugging
+console.log([\`\${part1}\`, \`\${part2}\`]);`);
 
 Deno.writeFileSync(`${folderPath}/answer.ts`, answerFileContent);
 Deno.writeFileSync(`${folderPath}/input.txt`, encoder.encode(''));
